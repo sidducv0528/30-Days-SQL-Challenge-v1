@@ -1,5 +1,10 @@
--- Day 02: Insert, Select, Where, Top
+-- Day 02: INSERT, SELECT, WHERE, DISTINCT
+-- Database: SQL Server (SSMS)
+-- Table: staff
+-- Description: Practiced basic DML operations and filtering
 
+
+-- Day 02: Insert, Select, Where, Top
 -- Inserting values into staff table
 insert into staff values
 (1,'Amit',29,'Male',56000,'IT','Delhi'),
