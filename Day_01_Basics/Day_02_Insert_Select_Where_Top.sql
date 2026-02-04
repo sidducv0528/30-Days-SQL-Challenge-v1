@@ -42,3 +42,9 @@ select * from staff where age = 35;
 select top (5) * from staff;
 select top (3) name from staff;
 select top (6) id, name, department from staff;
+
+
+-- Create required tables for Day 03 operations
+SELECT * INTO clone4 FROM staff;
+SELECT * INTO dup FROM staff;
+
