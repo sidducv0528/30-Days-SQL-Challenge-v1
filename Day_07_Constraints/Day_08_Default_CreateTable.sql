@@ -47,3 +47,6 @@ SELECT * FROM staff;
 
 -- Drop DEFAULT constraint
 ALTER TABLE staff DROP CONSTRAINT df_country;
+
+-- Check structure
+sp_help 'staff';
