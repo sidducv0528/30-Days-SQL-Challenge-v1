@@ -1,0 +1,175 @@
+
+  DAY 20 – TRIGGERS (AFTER & INSTEAD OF)
+  Database : ZOHO
+
+
+USE zoho;
+SELECT * FROM staff;
+
+
+-- INTRODUCTION TO TRIGGERS
+------------------------------------------------------------
+/*
+Trigger:
+A trigger is a special stored procedure that automatically
+executes when an INSERT, UPDATE, or DELETE occurs on a table.
+
+Types of Triggers:
+1. AFTER Trigger
+2. INSTEAD OF Trigger
+*/
+
+
+-- PART 1 : AFTER TRIGGERS
+------------------------------------------------------------
+
+/*
+AFTER Trigger:
+Runs AFTER the actual DML operation is completed.
+Used mainly for:
+- Logging
+- Auditing
+- Notifications
+*/
+
+
+-- AFTER UPDATE TRIGGER
+------------------------------------------------------------
+
+CREATE TRIGGER trig_update
+ON staff
+AFTER UPDATE
+AS
+BEGIN
+    PRINT('Your data has been successfully updated');
+END;
+
+
+-- Test
+UPDATE staff
+SET age = 29
+WHERE name = 'amit';
+
+
+-- AFTER INSERT & DELETE TRIGGER
+------------------------------------------------------------
+
+CREATE TRIGGER trig_ins_del
+ON staff
+AFTER INSERT, DELETE
+AS
+BEGIN
+    PRINT('Your data has been inserted or deleted');
+END;
+
+
+-- Test Insert
+INSERT INTO staff
+VALUES (30,'alex',32,'male',76000,'IT','London','UK');
+
+-- Test Delete
+DELETE FROM staff WHERE id = 30;
+
+-- AFTER DELETE ONLY TRIGGER
+------------------------------------------------------------
+
+CREATE TRIGGER trig_del
+ON staff
+AFTER DELETE
+AS
+BEGIN
+    PRINT('A row was deleted from staff table');
+END;
+
+
+DELETE FROM staff WHERE id = 29;
+
+
+-- PART 2 : INSTEAD OF TRIGGERS
+------------------------------------------------------------
+
+/*
+INSTEAD OF Trigger:
+Prevents the actual operation and runs custom logic.
+Used for:
+- Security
+- Preventing accidental updates/deletes
+*/
+
+
+-- INSTEAD OF UPDATE TRIGGER
+------------------------------------------------------------
+
+CREATE TRIGGER instrig_update
+ON staff
+INSTEAD OF UPDATE
+AS
+BEGIN
+    PRINT('Update operation is not allowed on staff table');
+END;
+
+
+-- Test (No data will be updated)
+UPDATE staff
+SET id = 99
+WHERE id = 28;
+
+
+-- INSTEAD OF DELETE TRIGGER
+------------------------------------------------------------
+
+CREATE TRIGGER instrig_delete
+ON staff
+INSTEAD OF DELETE
+AS
+BEGIN
+    PRINT('Delete operation is blocked by trigger');
+END;
+
+
+-- Test (No data will be deleted)
+DELETE FROM staff WHERE id = 28;
+
+
+-- DISABLE & ENABLE TRIGGERS
+------------------------------------------------------------
+
+-- Disable trigger
+ALTER TABLE staff DISABLE TRIGGER instrig_delete;
+
+-- Now delete will work
+DELETE FROM staff WHERE id = 28;
+
+-- Enable trigger again
+ALTER TABLE staff ENABLE TRIGGER instrig_delete;
+
+-- Delete blocked again
+DELETE FROM staff WHERE id = 27;
+
+-
+-- VIEW ALL TRIGGERS
+------------------------------------------------------------
+
+SELECT name, parent_class_desc
+FROM sys.triggers;
+
+
+-- DROP TRIGGERS
+------------------------------------------------------------
+
+DROP TRIGGER trig_update;
+DROP TRIGGER trig_ins_del;
+DROP TRIGGER trig_del;
+DROP TRIGGER instrig_update;
+DROP TRIGGER instrig_delete;
+
+
+-- IMPORTANT NOTES
+------------------------------------------------------------
+/*
+1. AFTER and INSTEAD OF triggers cannot run together
+   on the same event at the same time.
+2. INSTEAD OF has higher priority than AFTER.
+3. Triggers increase security but reduce performance
+   if overused.
+*/
