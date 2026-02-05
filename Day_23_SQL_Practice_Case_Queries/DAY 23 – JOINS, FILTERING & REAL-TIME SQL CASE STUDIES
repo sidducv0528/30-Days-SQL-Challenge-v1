@@ -1,0 +1,149 @@
+
+  DAY 23 – JOINS, FILTERING & REAL-TIME SQL CASE STUDIES
+  Database : ZOHO
+
+
+USE zoho;
+
+
+-- PART 1 : CUSTOMER TABLE & FILTERING
+------------------------------------------------------------
+
+CREATE TABLE customer_table (
+customer_id INT,
+first_name VARCHAR(250),
+last_name VARCHAR(250),
+email VARCHAR(250),
+address VARCHAR(250),
+city VARCHAR(250),
+state VARCHAR(250),
+zip INT
+);
+
+INSERT INTO customer_table VALUES
+(1,'Gaurav','Mehta','gaurav@gmail.com','MG Road','SanJose','CA',95112),
+(2,'Rohan','Sharma','rohan@yahoo.com','Park Street','Delhi','DL',110001),
+(3,'Geeta','Verma','geeta@gmail.com','Lake View','SanJose','CA',95110),
+(4,'Amit','Kapoor','amit@gmail.com','Hill Road','Mumbai','MH',400001),
+(5,'Gopal','Singh','gopal@hotmail.com','Ring Road','Jaipur','RJ',302001);
+
+-- Select first & last name
+SELECT first_name, last_name FROM customer_table;
+
+-- Names starting with G and city SanJose
+SELECT * FROM customer_table
+WHERE first_name LIKE 'G%' AND city = 'SanJose';
+
+-- Gmail users
+SELECT * FROM customer_table
+WHERE email LIKE '%gmail%';
+
+-- Last name not ending with A
+SELECT last_name FROM customer_table
+WHERE last_name NOT LIKE '%A';
+
+
+-- PART 2 : JOINS (CUSTOMER & ORDERS)
+------------------------------------------------------------
+
+CREATE TABLE customer_X (
+customer_id INT,
+first_name VARCHAR(50),
+last_name VARCHAR(50),
+phone_number VARCHAR(15)
+);
+
+INSERT INTO customer_X VALUES
+(1,'rahul','sharma','9876543210'),
+(2,'priya','verma','8765432109'),
+(3,'amit','singh','9854321098'),
+(4,'neha','patel','9543210987'),
+(5,'rohit','mehta','6332109876');
+
+CREATE TABLE Orders (
+order_id INT,
+order_date DATE,
+amount DECIMAL(10,2),
+customer_id INT
+);
+
+INSERT INTO Orders VALUES
+(101,'2026-01-01',2500.00,1),
+(102,'2026-01-05',1500.00,2),
+(103,'2026-01-10',3200.00,3),
+(104,'2026-01-15',4500.00,4),
+(105,'2026-01-20',2800.00,5);
+
+-- INNER JOIN
+SELECT *
+FROM customer_X c
+INNER JOIN Orders o
+ON c.customer_id = o.customer_id;
+
+-- LEFT JOIN
+SELECT *
+FROM customer_X c
+LEFT JOIN Orders o
+ON c.customer_id = o.customer_id;
+
+-- FULL JOIN
+SELECT *
+FROM customer_table t
+FULL JOIN Orders o
+ON t.customer_id = o.customer_id;
+
+
+-- PART 3 : REAL-TIME ANALYTICS (FACT, LOCATION, PRODUCT)
+------------------------------------------------------------
+
+-- 1. Number of states
+SELECT COUNT(DISTINCT state) FROM location;
+
+-- 2. Regular products count
+SELECT COUNT(*) FROM product WHERE type = 'regular';
+
+-- 3. Marketing spend on product 1
+SELECT SUM(marketing) FROM fact WHERE productid = 1;
+
+-- 4. Minimum sales
+SELECT MIN(sales) FROM fact;
+
+-- 5. Max COGS
+SELECT MAX(cogs) FROM fact;
+
+-- 6. Coffee products
+SELECT * FROM product WHERE product_type = 'coffee';
+
+-- 7. Expenses > 40
+SELECT * FROM fact WHERE total_expenses > 40;
+
+-- 8. Avg sales for area code 719
+SELECT AVG(sales) FROM fact WHERE area_code = 719;
+
+-- 9. Profit from Colorado
+SELECT SUM(profit)
+FROM fact f
+JOIN location l ON f.area_code = l.area_code
+WHERE state = 'colorado';
+
+-- 10. Avg inventory by product
+SELECT productid, AVG(inventory)
+FROM fact
+GROUP BY productid;
+
+-- 11. Dense rank sales
+SELECT sales, DENSE_RANK() OVER (ORDER BY sales DESC) AS sales_rank
+FROM fact;
+
+-- 12. State wise profit & sales
+SELECT l.state, SUM(f.profit), SUM(f.sales)
+FROM fact f
+JOIN location l ON f.area_code = l.area_code
+GROUP BY l.state;
+
+-- 13. State & product wise profit
+SELECT p.product, l.state, SUM(f.profit), SUM(f.sales)
+FROM fact f
+JOIN product p ON f.productid = p.productid
+JOIN location l ON f.area_code = l.area_code
+GROUP BY p.product, l.state;
