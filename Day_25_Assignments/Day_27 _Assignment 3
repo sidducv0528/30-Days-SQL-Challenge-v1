@@ -1,0 +1,100 @@
+--THIS QUESTIONS IS RELETD TO PREVIOUS DATASET
+
+  
+-- 1. Create a stored procedure to display the restaurant name, type and cuisine 
+-- where the table booking is not zero.
+-------------------------------------------------------------------------------
+IF OBJECT_ID('GetActiveBookings', 'P') IS NOT NULL DROP PROCEDURE GetActiveBookings;
+
+CREATE PROCEDURE GetActiveBookings
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT RestaurantName, RestaurantType, Cuisine
+    FROM Restaurants
+    WHERE TableBooking <> 0;
+
+
+-- EXEC GetActiveBookings; -- Test the procedure
+
+
+-- 2. Create a transaction and update the cuisine type ‘Cafe’ to ‘Cafeteria’. 
+-- Check the result and rollback it.
+-------------------------------------------------------------------------------
+BEGIN TRANSACTION;
+
+UPDATE Restaurants
+SET Cuisine = 'Cafeteria'
+WHERE Cuisine = 'Cafe';
+
+-- Check the result while inside the transaction
+SELECT * FROM Restaurants WHERE Cuisine = 'Cafeteria';
+
+-- Undo the changes
+ROLLBACK TRANSACTION;
+
+-- Verify the rollback
+SELECT * FROM Restaurants WHERE Cuisine = 'Cafeteria';
+
+
+-- 3. Generate a row number column and find the top 5 areas with the 
+-- highest rating of restaurants.
+-------------------------------------------------------------------------------
+SELECT * FROM (
+    SELECT 
+        Area, 
+        AVG(Rating) as AvgRating,
+        ROW_NUMBER() OVER (ORDER BY AVG(Rating) DESC) as RowNum
+    FROM Restaurants
+    GROUP BY Area
+) AS RankedAreas
+WHERE RowNum <= 5;
+
+
+-- 4. Use the while loop to display the 1 to 50.
+-------------------------------------------------------------------------------
+DECLARE @Counter INT = 1;
+
+WHILE @Counter <= 50
+BEGIN
+    PRINT 'Number: ' + CAST(@Counter AS VARCHAR(2));
+    SET @Counter = @Counter + 1;
+END;
+
+
+-- 5. Write a query to Create a Top rating view to store the generated 
+-- top 5 highest rating of restaurants.
+-------------------------------------------------------------------------------
+IF OBJECT_ID('TopRatingView', 'V') IS NOT NULL DROP VIEW TopRatingView;
+
+
+CREATE VIEW TopRatingView AS
+SELECT TOP 5 
+    RestaurantName, 
+    Area, 
+    Rating
+FROM Restaurants
+ORDER BY Rating DESC;
+
+
+-- SELECT * FROM TopRatingView; -- Test the view
+
+
+-- 6. Create a trigger that gives a message whenever a new record is added.
+-------------------------------------------------------------------------------
+IF OBJECT_ID('trg_NewRecordAlert', 'TR') IS NOT NULL DROP TRIGGER trg_NewRecordAlert;
+
+
+CREATE TRIGGER trg_NewRecordAlert
+ON Restaurants
+AFTER INSERT
+AS
+BEGIN
+    PRINT 'A new restaurant record has been successfully added to the system.';
+END;
+
+
+
+
+
+*/
