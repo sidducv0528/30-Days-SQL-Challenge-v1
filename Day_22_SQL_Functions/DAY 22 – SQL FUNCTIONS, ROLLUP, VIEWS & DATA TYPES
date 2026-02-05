@@ -1,0 +1,98 @@
+
+  DAY 22 – SQL FUNCTIONS, ROLLUP, VIEWS & DATA TYPES
+
+
+USE zoho;
+SELECT * FROM staff;
+
+
+-- PART 1 : MATHEMATICAL FUNCTIONS
+------------------------------------------------------------
+
+-- FLOOR() : Rounds decimal value DOWN
+SELECT FLOOR(10.39);
+SELECT FLOOR(56.320);
+SELECT FLOOR(99.1230);
+SELECT FLOOR(-56.29);
+SELECT FLOOR(55.24);
+
+-- CEILING() : Rounds decimal value UP
+SELECT CEILING(5.21);
+SELECT CEILING(69.325);
+SELECT CEILING(45.69);
+SELECT CEILING(56.55);
+SELECT CEILING(-45.4);
+
+-- PART 2 : COALESCE() FUNCTION
+------------------------------------------------------------
+/*
+COALESCE():
+Replaces NULL values with a default value
+*/
+
+SELECT *, COALESCE(country, 'India') AS country_updated
+FROM staff;
+
+
+-- PART 3 : ROLLUP()
+------------------------------------------------------------
+/*
+ROLLUP():
+Used to generate subtotals and grand totals
+*/
+
+UPDATE staff SET salary = 74000 WHERE salary IS NULL;
+
+-- Normal Group By
+SELECT department, SUM(salary) AS total_salary
+FROM staff
+GROUP BY department;
+
+-- Group By with ROLLUP
+SELECT department, SUM(salary) AS total_salary
+FROM staff
+GROUP BY ROLLUP(department);
+
+-- Replace NULL with TOTAL
+SELECT COALESCE(department, 'TOTAL') AS department,
+       SUM(salary) AS total_salary
+FROM staff
+GROUP BY ROLLUP(department);
+
+
+-- PART 4 : VIEWS & PERMISSIONS
+------------------------------------------------------------
+
+CREATE VIEW view_name AS
+SELECT name FROM staff;
+
+GRANT SELECT ON view_name TO siddu;
+
+
+-- PART 5 : VARCHAR vs NVARCHAR
+------------------------------------------------------------
+/*
+VARCHAR  : ASCII characters
+NVARCHAR : Unicode (multi-language support)
+*/
+
+CREATE TABLE VARCHAR_X (Name VARCHAR(30));
+INSERT INTO VARCHAR_X VALUES ('Jay');
+INSERT INTO VARCHAR_X VALUES ('??');
+SELECT * FROM VARCHAR_X;
+
+CREATE TABLE NVARCHAR_X (Name NVARCHAR(30));
+INSERT INTO NVARCHAR_X VALUES ('Jay');
+INSERT INTO NVARCHAR_X VALUES (N'??');
+INSERT INTO NVARCHAR_X VALUES (N'???');
+SELECT * FROM NVARCHAR_X;
+
+
+-- IMPORTANT NOTES
+------------------------------------------------------------
+/*
+1. FLOOR always rounds down
+2. CEILING always rounds up
+3. COALESCE is widely used in reporting
+4. NVARCHAR is required for Unicode data
+*/
