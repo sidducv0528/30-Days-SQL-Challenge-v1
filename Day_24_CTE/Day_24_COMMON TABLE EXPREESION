@@ -1,0 +1,110 @@
+
+  DAY 24 – COMMON TABLE EXPRESSIONS (CTE)
+  Database : ZOHO
+
+
+USE zoho;
+SELECT * FROM staff;
+
+
+-- INTRODUCTION TO CTE
+------------------------------------------------------------
+/*
+CTE (Common Table Expression):
+A temporary result set used within a SELECT, INSERT, UPDATE, DELETE.
+Improves readability and logic clarity.
+*/
+
+-- BASIC CTE
+------------------------------------------------------------
+
+WITH Staff_CTE AS (
+    SELECT id, name, salary, department
+    FROM staff
+    WHERE salary > 50000
+)
+SELECT * FROM Staff_CTE;
+
+
+-- MULTIPLE CTE
+------------------------------------------------------------
+
+WITH Dept_CTE AS (
+    SELECT department, AVG(salary) AS avg_salary
+    FROM staff
+    GROUP BY department
+)
+SELECT * FROM Dept_CTE
+WHERE avg_salary > 60000;
+
+
+-- CTE WITH UPDATE
+------------------------------------------------------------
+
+WITH Salary_CTE AS (
+    SELECT * FROM staff WHERE department = 'HR'
+)
+UPDATE Salary_CTE
+SET salary = salary + 3000;
+
+-- IMPORTANT NOTES
+------------------------------------------------------------
+/*
+1. CTE exists only during query execution
+2. More readable than subqueries
+*/
+
+  DAY 24 – COMMON TABLE EXPRESSIONS (CTE)
+  Database : ZOHO
+
+
+USE zoho;
+SELECT * FROM staff;
+
+
+-- INTRODUCTION TO CTE
+------------------------------------------------------------
+/*
+CTE (Common Table Expression):
+A temporary result set used within a SELECT, INSERT, UPDATE, DELETE.
+Improves readability and logic clarity.
+*/
+
+-- BASIC CTE
+------------------------------------------------------------
+
+WITH Staff_CTE AS (
+    SELECT id, name, salary, department
+    FROM staff
+    WHERE salary > 50000
+)
+SELECT * FROM Staff_CTE;
+
+
+-- MULTIPLE CTE
+------------------------------------------------------------
+
+WITH Dept_CTE AS (
+    SELECT department, AVG(salary) AS avg_salary
+    FROM staff
+    GROUP BY department
+)
+SELECT * FROM Dept_CTE
+WHERE avg_salary > 60000;
+
+
+-- CTE WITH UPDATE
+------------------------------------------------------------
+
+WITH Salary_CTE AS (
+    SELECT * FROM staff WHERE department = 'HR'
+)
+UPDATE Salary_CTE
+SET salary = salary + 3000;
+
+-- IMPORTANT NOTES
+------------------------------------------------------------
+/*
+1. CTE exists only during query execution
+2. More readable than subqueries
+*/
