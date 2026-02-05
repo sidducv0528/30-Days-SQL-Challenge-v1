@@ -1,0 +1,149 @@
+                        ---------Assignment  1---------------
+create database  store_details
+-- Salesman Table 
+CREATE TABLE Salesman (
+SalesmanId INT,
+Name VARCHAR(255),
+Commission DECIMAL(10, 2),
+City VARCHAR(255),
+Age INT
+);
+
+--Insertion values 
+INSERT INTO Salesman (SalesmanId, Name, Commission, City, Age)
+VALUES
+(101, 'Joe', 50, 'California', 17),
+(102, 'Simon', 75, 'Texas', 25),
+(103, 'Jessie', 105, 'Florida', 35),
+(104, 'Danny', 100, 'Texas', 22),
+(105, 'Lia', 65, 'New Jersey', 30);
+
+select *from Salesman
+
+
+--Customer Table
+CREATE TABLE Customer (
+SalesmanId INT,
+CustomerId INT,
+CustomerName VARCHAR(255),
+PurchaseAmount INT,
+);
+
+--Insertion Values
+INSERT INTO Customer (SalesmanId, CustomerId, CustomerName, PurchaseAmount)
+VALUES
+(101, 2345, 'Andrew', 550),
+(103, 1575, 'Lucky', 4500),
+(104, 2345, 'Andrew', 4000),
+(107, 3747, 'Remona', 2700),
+(110, 4004, 'Julia', 4545);
+
+select *from Customer
+
+--Orders Table
+CREATE TABLE Orders (
+    OrderId int,
+    CustomerId int, 
+    SalesmanId int, 
+    Orderdate Date, 
+    Amount money
+);
+--Inserting Values
+INSERT INTO Orders Values
+(5001,2345,101,'2021-07-01',550),
+(5003,1234,105,'2022-02-15',1500)
+
+select *from Orders
+
+
+--- 1. Insert a new record in your Orders table.
+INSERT INTO Orders Values
+(5004,1575,122,'2024-05-19',5500);
+
+select *from Orders
+
+--2. Add Primary key constraint for SalesmanId column in Salesman table. Add default
+constraint for City column in Salesman table. Add Foreign key constraint for SalesmanId
+column in Customer table. Add not null constraint in Customer_name column for the
+Customer table.
+
+alter table Salesman  add constraint primary key pr_kry(salesman id)
+alter table Salesman  add constraint default  def(city)
+alter table salesman  add foreign key fr(salesmanid) on primarykey
+alter table customer  add  customer_name  is not null
+
+--1. Primary key for Salesman
+ALTER TABLE Salesman ALTER COLUMN SalesmanID  INT   NOT NULL;
+ALTER TABLE Salesman   ADD CONSTRAINT   pk_salesman PRIMARY KEY (SalesmanID);
+
+--2. deafult Constraint for City
+ALTER TABLE Salesman ADD CONSTRAINT  Def_city  DEFAULT 'unknown' for City;
+select *from salesman
+
+--3 NOT NULL  for custommerNmae
+ALTER TABLE Customer ALTER COLUMN  CustomerName varchar(255) NOT NULL;
+
+--4   FOREIGN KEY for Salesmanid  in Customer Table and Refrence is Salesman Table
+ALTER TABLE Customer ADD CONSTRAINT FK_CustomerSalesman FOREIGN KEY (SalesmanID) 
+REFERENCES Salesman(salesmanID)
+
+-- ABOVE ONE NOT EXCUTED BECAUSE (before child parents should excute so update parent class or child class)
+
+SELECT * FROM Customer 
+WHERE SalesmanId NOT IN (SELECT SalesmanId FROM Salesman);
+
+UPDATE Customer
+SET SalesmanId = 102
+WHERE  CustomerName = 'Remona'
+
+UPDATE Customer
+SET SalesmanId = 105
+WHERE  CustomerName = 'Julia'  
+
+---NOW ADD FOREIGN KEY
+ALTER TABLE Customer  ADD CONSTRAINT FR_Customersalesman FOREIGN KEY (salesmanID)
+REFERENCES  Salesman(SalesmanID);
+
+sp_help 'Customer'
+
+--3. Fetch the data where the Customer’s name is ending with ‘N’ also get the purchase
+amount value greater than 500.
+
+SELECT *FROM Customer
+WHERE  CustomerName like '%N' AND PurchaseAmount > 500 ;
+
+--4. Using SET operators, retrieve the first result with unique SalesmanId values from two
+tables, and the other result containing SalesmanId with duplicates from two tables.
+
+---- Result with unique SalesmanId values
+SELECT SalesmanID from Salesman
+UNION
+SELECT SalesmanID  from Customer
+
+-- Result with all SalesmanId values (including duplicates)
+SELECT SalesmanID from Salesman
+UNION ALL
+SELECT SalesmanID  from Customer
+
+
+--5. Display the below columns which has the matching data.
+Orderdate, Salesman Name, Customer Name, Commission, and City which has the
+range of Purchase Amount between 500 to 1500.
+
+SELECT *FROM Customer
+SELECT *FROM salesman
+SELECT *FROM Orders
+
+SELECT o.Orderdate ,s.Name AS Salesman  , c.CustomerName , s.Commission ,s.city 
+FROM ORDERS o
+JOIN  Customer c  on o.CustomerId = c.CustomerId 
+JOIN  Salesman s on s.SalesmanId = o.SalesmanId
+WHERE  c.PurchaseAmount  BETWEEN 500  AND 1500 ;
+
+--6. Using right join fetch all the results from Salesman and Orders table.
+SELECT *FROM 
+Salesman s   RIGHT JOIN Orders o on s.SalesmanId = o.SalesmanId;
+
+
+
+-----------------------------END------------------------
