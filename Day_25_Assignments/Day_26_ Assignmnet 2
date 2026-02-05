@@ -1,0 +1,70 @@
+--THE DATA IS INSERTED FROM CSV 
+--DATA RELATED TO ZOMOTO
+  https://livelmsip.s3.amazonaws.com/mediaFiles/2026/01/15141832/Jomato-1-1-1-1-1.zip
+
+
+                                        ---------------ASSIGNMENT 2 ---------------------
+
+
+CREATE DATABASE Q_Commerce
+
+USE  Q_Commerce
+
+SELECT *FROM Jomato
+
+
+--1. Create a user-defined functions to stuff the Chicken into ‘Quick Bites’. Eg: ‘Quick
+Chicken Bites’.
+
+CREATE FUNCTION  ModifyBites
+(@string  VARCHAR(255))
+RETURNS VARCHAR(255)
+AS BEGIN
+RETURN REPLACE(@String,'Quick Bites','Quick Chicken Bites')
+END 
+SELECT DBO. ModifyBites('Quick Bites')
+
+--2. Use the function to display the restaurant name and cuisine type which has the
+maximum number of rating.
+
+SELECT RestaurantName , CuisinesType  FROM Jomato 
+WHERE NO_of_Rating = (SELECT MAX(NO_of_Rating) FROM Jomato)
+
+--3. Create a Rating Status column to display the rating as ‘Excellent’ if it has more the 4
+start rating, ‘Good’ if it has above 3.5 and below 5 star rating, ‘Average’ if it is above 3
+and below 3.5 and ‘Bad’ if it is below 3 star rating
+
+SELECT RestaurantName , 
+          Rating ,
+CASE 
+    WHEN   Rating > 4 THEN 'Excellent'
+    WHEN   Rating >= 3.5  AND  Rating  <= 5 THEN 'Good'
+    WHEN   Rating >= 3    AND  Rating  <= 3.5 THEN  'Average'
+    ELSE 'BAD'
+    END AS Runnning_Stauts
+FROM  Jomato
+
+
+4. Find the Ceil, floor and absolute values of the rating column and display the current date
+and separately display the year, month_name and day.
+
+SELECT 
+     Rating,
+  CEILING(Rating) AS Ceiling_Rating,
+  FLOOR(Rating) AS Floor_rating,
+  ABS(Rating) AS Abosulte_rating,
+  GETDATE() AS Curren_date_Time ,
+  YEAR(GETDATE()) AS Current_Year,
+  DATENAME(MONTH ,GETDATE()) AS Month_name,
+  DAY(GETDATE()) AS Current_day 
+FROM Jomato
+
+5. Display the restaurant type and total average cost using rollup
+
+SELECT 
+    COALESCE(RestaurantType, 'Total') AS Restaurant_Type_Total, 
+    SUM(AverageCost) AS Total_Avgcost
+FROM Jomato
+GROUP BY ROLLUP(RestaurantType);
+
+             ----------------------------END---------------------------------
