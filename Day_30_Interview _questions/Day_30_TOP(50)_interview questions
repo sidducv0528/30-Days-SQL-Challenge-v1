@@ -1,0 +1,66 @@
+----------------------------------------------
+Top 50 SQL Interview Questions
+Frequently Asked in Technical Interview Rounds
+---------------------------------------------------
+
+-----------------------------
+Basic SQL Questions (1–15)
+-----------------------------
+1 What is SQL and where is it used?
+2 Explain DDL, DML, DCL, and TCL commands.
+3 Difference between DELETE and TRUNCATE.
+4 What is a PRIMARY KEY?
+5 What is a FOREIGN KEY?
+6 What is NULL?
+7 Difference between CHAR and VARCHAR.
+8 What is DISTINCT?
+9 Explain WHERE clause.
+10 What is ORDER BY?
+11 What are aggregate functions?
+12 What is GROUP BY?
+13 Difference between WHERE and HAVING.
+14 What is an alias in SQL?
+15 What is a VIEW?
+
+-----------------------------------  
+Intermediate SQL Questions (16–35)
+-----------------------------------  
+1 What is a JOIN?
+2 Types of JOINs in SQL.
+3 Difference between INNER JOIN and LEFT JOIN.
+4 What is a SELF JOIN?
+5 What is a Subquery?
+6 What is a Correlated Subquery?
+7 Difference between UNION and UNION ALL.
+8 What is an INDEX?
+9 What is normalization?
+10 Explain 1NF, 2NF, and 3NF.
+11 What is denormalization?
+12 What is BETWEEN operator?
+13 What is IN operator?
+14 What is LIKE operator?
+15 What is a temporary table?
+16 Difference between function and stored procedure?
+17 What is a trigger?
+18 What is a transaction?
+19 Explain ACID properties.
+20 What is COMMIT and ROLLBACK?
+
+---------------------------------  
+Advanced SQL Questions (36–50)
+---------------------------------
+1 What is a CTE?
+2 Difference between CTE and subquery.
+3 What are window functions?
+4 Explain ROW_NUMBER, RANK, and DENSE_RANK.
+5 What is PARTITION BY?
+6 What is CASE statement?
+7 What is execution plan?
+8 How to improve SQL query performance?
+9 What is deadlock?
+10 What are indexes and their types?
+11 What is data integrity?
+12 What is pivot in SQL?
+13 What is recursive CTE?
+14 How do you handle duplicate records?
+15 Most common mistakes in SQL interviews.
