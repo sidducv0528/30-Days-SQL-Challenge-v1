@@ -1,0 +1,51 @@
+--THIS QUESTIONS ARE SELF_PRACTISE (Technical Round)
+--------------------------------------------------------
+Basic SQL (Hands-on)
+--------------------------------------------------------  
+1 Find the second highest salary from an employee table.
+2 Find employees earning more than the average salary.
+3 Identify duplicate records in a table.
+4 Delete duplicate rows but keep one record.
+5 Count employees in each department.
+6 Fetch top 5 highest-paid employees.
+7 Find employees joined in the last 30 days.
+8 Handle NULL values in a column.
+9 Replace NULL salaries with zero.
+10 Fetch odd and even rows from a table.
+
+------------------------------------------------------  
+Intermediate SQL (Query Logic)
+------------------------------------------------------  
+1 Find the third highest salary without using LIMIT or TOP.
+2 Find departments with more than 5 employees.
+3 Find employees without a department.
+4 Find employees having the same salary.
+5 Find highest salary in each department.
+6 Find employees earning more than their manager.
+7 Fetch latest record from each group.
+8 Find customers with multiple orders.
+9 Records present in Table A but not in Table B.
+10 Find top 2 salaries per department.
+
+-----------------------------------------------------
+Advanced SQL (Real-World)
+-----------------------------------------------------
+1 Remove duplicate rows using CTE.
+2 Find customers who never placed an order.
+3 Calculate percentage contribution of each product.
+4 Explain and analyze execution plans.
+5 Calculate running total of sales.
+6 Find consecutive login days of users.
+7 Calculate month-over-month growth.
+8 Pivot rows into columns.
+9 Optimize a slow-running SQL query.
+10 Explain index types and usage.
+
+--------------------------------------------------------
+SQL for Analytics
+--------------------------------------------------------
+1 Calculate customer retention rate.
+2 Identify churned users.
+3 Rank products based on monthly revenue.
+4 Perform funnel analysis using SQL.
+5 Detect outliers using SQL logic
