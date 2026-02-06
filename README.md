@@ -1,66 +1,72 @@
-# 📊 30 Days SQL Challenge
+# 🚀 30 Days SQL Challenge
 
-This repository documents my **30 Days SQL Challenge**, where I consistently practiced
-**intermediate to advanced SQL concepts** using **SQL Server (SSMS)**.
+## 📌 Overview
 
-The focus of this challenge was to strengthen my SQL foundation for
-**Data Science and Analytics roles**, with hands-on assignments and real-world–style queries.
+This repository documents my **30 Days SQL Challenge**, where I consistently practiced SQL from fundamentals to advanced concepts with a strong focus on **real-world queries, business logic, and interview preparation**.
 
----
-
-## 🎯 Objective
-- Build strong SQL fundamentals with daily practice
-- Gain confidence in writing analytical and interview-level queries
-- Prepare SQL skills required for Data Scientist roles
-- Maintain consistency and proof of learning using GitHub
+The goal of this challenge is to build **strong SQL foundations**, improve **problem-solving ability**, and create **public proof of hands-on SQL practice** for recruiters and interviewers.
 
 ---
 
-## 🧠 Topics Covered
-- SELECT, WHERE, ORDER BY
+## 🧠 Skills Covered
+
+- SQL Basics (SELECT, WHERE, ORDER BY)
+- Filtering & Sorting
 - Aggregate Functions (COUNT, SUM, AVG, MIN, MAX)
 - GROUP BY & HAVING
-- JOINS (INNER, LEFT, RIGHT)
-- Subqueries
-- Common Table Expressions (CTEs)
+- Constraints & Keys
+- JOINS (INNER, LEFT, RIGHT, FULL)
+- Subqueries (Single & Correlated)
 - Window Functions (ROW_NUMBER, RANK, DENSE_RANK)
-- Constraints & Data Validation
-- Basic Data Cleaning using SQL
-- Interview-Oriented SQL Problems
+- Common Table Expressions (CTE)
+- Views & Indexes
+- Transactions
+- Case Statements (IF, CASE)
+- Real-world Case Studies
+- Interview-style SQL Problems
 
 ---
 
-## 🛠 Tools & Technologies
-- **SQL Server (SSMS)**
-- GitHub
+## 📂 Repository Structure
+
+Each folder represents **one day of focused SQL practice**, progressing from beginner to advanced concepts.
+
+| Folder | Topic |
+|----------|---------|
+| Day_01_Basics | SQL Fundamentals |
+| Day_07_Constraints | Constraints & Keys |
+| Day_11_System_Functions | Built-in SQL Functions |
+| Day_14_Joins | SQL Joins |
+| Day_15_Subqueries | Subqueries |
+| Day_16_IIF_CASE | Conditional Logic |
+| Day_17_Rank_DenseRank | Window Functions |
+| Day_18_Indexes | Indexing |
+| Day_19_Views | Views & Stored Procedures |
+| Day_20_Triggers | Triggers & Advanced Concepts |
+| Day_21_Transactions | Transactions & ACID |
+| Day_22_SQL_Functions | Advanced SQL Functions |
+| Day_23_SQL_Practice_Case_Queries | Real-world SQL Queries |
+| Day_24_CTE | Common Table Expressions |
+| Day_25_Assignments | Practice Assignments |
+| Day_28_Case_Study_and_Practice | Business Case Studies |
+| Day_29_CASE_STUDY | Advanced Case Study |
+| Day_30_Interview_Questions | Interview SQL Questions |
 
 ---
 
-## 📅 Challenge Structure
-- Each day contains SQL queries focused on a specific concept
-- Queries are written and tested in SQL Server
-- Assignments are based on practical and interview-style questions
-- Case studies are planned and will be added in future updates
+## 🛠 Tools & Technologies Used
+
+- SQL Server (SSMS 22)
+- Git & GitHub
 
 ---
 
-## 🚀 Key Outcomes
-- Improved logical thinking for analytical queries
-- Hands-on experience with real-world SQL patterns
-- Strong SQL practice proof for resumes and interviews
-- Better understanding of SQL usage in Data Science workflows
+## 🎯 What This Project Demonstrates
 
----
+- Daily consistency and discipline
+- Strong understanding of SQL fundamentals and advanced concepts
+- Real-world SQL problem solving
+- Interview-focused SQL practice
+- Clean and structured SQL scripting
 
-## 📌 Upcoming Enhancements
-- SQL Case Studies (Business-focused)
-- Optimized folder structure
-- Query explanations and comments
-- Advanced analytical scenarios
-
----
-
-## 👤 Author
-**Siddu**  
-Aspiring **Data Scientist**  
 
