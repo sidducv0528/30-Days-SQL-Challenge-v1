@@ -207,3 +207,19 @@ alter table employee add constraint nmae unique(fullname)
 alter table employee  add  constraint chck check (salary>0)
 
 exec sp_help 'employee'
+
+
+
+
+# finding duplicates
+
+WITH duplicate AS (
+    SELECT emp_id 
+    FROM (
+        SELECT emp_id, 
+               ROW_NUMBER() OVER(PARTITION BY empno ORDER BY emp_no) AS row_num
+        FROM employee
+    ) dp 
+    WHERE row_num > 1
+)
+SELECT * FROM duplicate;
